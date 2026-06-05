@@ -75,7 +75,7 @@ extern bool oplus_adfr_compatibility_mode;
 
 /* --------------- adfr misc ---------------*/
 void oplus_adfr_init(void *dsi_panel);
-inline bool oplus_adfr_is_support(void);
+bool oplus_adfr_is_support(void);
 ssize_t oplus_adfr_get_debug(struct kobject *obj, struct kobj_attribute *attr,
 			     char *buf);
 ssize_t oplus_adfr_set_debug(struct kobject *obj, struct kobj_attribute *attr,

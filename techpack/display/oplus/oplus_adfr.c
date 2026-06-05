@@ -1730,7 +1730,7 @@ static int dsi_panel_send_auto_minfps_dcs(struct dsi_panel *panel, int ctrl_idx,
 		tx_len = cmds[SDC_MANUAL_MIN_FPS_CMD_OFFSET].msg.tx_len;
 		tx_buf = (u8 *)cmds[SDC_MANUAL_MIN_FPS_CMD_OFFSET].msg.tx_buf;
 		if (tx_len != SDC_MIN_FPS_CMD_SIZE) {
-			DSI_ERR("kVRR [%s] No commands to be sent for manual min fps, wrong cmds size %u.\n",
+			DSI_ERR("kVRR [%s] No commands to be sent for manual min fps, wrong cmds size %lu.\n",
 				panel->name, tx_len);
 			goto exit;
 		}
@@ -1767,7 +1767,7 @@ static int dsi_panel_send_auto_minfps_dcs(struct dsi_panel *panel, int ctrl_idx,
 		tx_len = cmds[SDC_AUTO_MIN_FPS_CMD_OFFSET].msg.tx_len;
 		tx_buf = (u8 *)cmds[SDC_AUTO_MIN_FPS_CMD_OFFSET].msg.tx_buf;
 		if (tx_len != SDC_MIN_FPS_CMD_SIZE) {
-			DSI_ERR("kVRR [%s] No commands to be sent for auto min fps, wrong cmds size %u.\n",
+			DSI_ERR("kVRR [%s] No commands to be sent for auto min fps, wrong cmds size %lu.\n",
 				panel->name, tx_len);
 			goto exit;
 		}

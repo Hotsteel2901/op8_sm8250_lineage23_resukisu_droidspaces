@@ -24371,7 +24371,7 @@ static const int mi2s_rx_vi_fb_tx_value[] = {
 };
 
 #ifdef OPLUS_ARCH_EXTENDS
-static const int const tert_mi2s_rx_vi_fb_tx_value[] = {
+static const int tert_mi2s_rx_vi_fb_tx_value[] = {
 	MSM_BACKEND_DAI_MAX, MSM_BACKEND_DAI_TERTIARY_MI2S_TX
 };
 
@@ -24386,7 +24386,7 @@ static const struct snd_kcontrol_new tert_mi2s_rx_vi_fb_mux =
 	spkr_prot_put_vi_lch_port);
 
 /*modified for pri tdm_0 feedback*/
-static const int const pri_tdm_rx_vi_fb_tx_value[] = {
+static const int pri_tdm_rx_vi_fb_tx_value[] = {
 	MSM_BACKEND_DAI_MAX, MSM_BACKEND_DAI_PRI_TDM_TX_0
 };
 

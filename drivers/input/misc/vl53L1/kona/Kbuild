@@ -28,3 +28,4 @@ stmvl53l1-objs		+= src/vl53l1_zone_presets.o src/vl53l1_nvm.o
 stmvl53l1-objs		+= src/vl53l1_api_debug.o src/vl53l1_core_support.o
 stmvl53l1-objs		+= src/vl53l1_wait.o ipp/ipp_linux.o
 stmvl53l1-objs		+= src/vl53l1_nvm_debug.o
+ccflags-y += -I$(srctree)/drivers/input/misc/vl53L1/kona
