@@ -20,7 +20,7 @@ No prior kernel building experience is assumed.
   - [1.4 Configure Git](#14-configure-git)
 - [2. Get the Toolchain](#2-get-the-toolchain)
   - [2.1 What Is a Cross-Compiler?](#21-what-is-a-cross-compiler)
-  - [2.2 Install the AOSP GCC 9.3.0 Prebuilt](#22-install-the-aosp-gcc-930-prebuilt)
+  - [2.2 Install the LineageOS GCC 9.3.0 Prebuilt](#22-install-the-lineageos-gcc-930-prebuilt)
   - [2.3 Verify the Toolchain Works](#23-verify-the-toolchain-works)
 - [3. Clone the Kernel Source](#3-clone-the-kernel-source)
   - [3.1 Clone the Repository](#31-clone-the-repository)
@@ -214,26 +214,34 @@ We use **GCC 9.3.0** because it's the version this kernel was validated against.
 versions (10, 11, 12) may produce warnings that become errors due to the kernel's strict
 compiler flags.
 
-### 2.2 Install the AOSP GCC 9.3.0 Prebuilt
+### 2.2 Install the LineageOS GCC 9.3.0 Prebuilt
 
-The easiest way to get the right toolchain is from AOSP's prebuilt repository:
+This kernel is built against the exact same toolchain LineageOS uses for their official
+SM8250 builds. Get it from the LineageOS GitHub:
 
 ```bash
 # Navigate to your home directory
 cd ~
 
-# Clone the AOSP GCC 9.3.0 prebuilt for ARM64
-git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-gnu-9.3 \
-    android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-9.3
+# Clone the LineageOS GCC 9.3.0 prebuilt for ARM64
+gh repo clone LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-9.3
 ```
 
-> This is a ~400 MB download. If Google's servers are slow, there's a mirror at:
-> `https://github.com/arter97/arm64-gcc` (GCC 9.2, compatible but untested with this kernel).
+> This is a ~400 MB download. If you don't have `gh` installed, use:
+> ```bash
+> git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-9.3.git
+> ```
 
 After cloning, the toolchain lives at:
 ```
 ~/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-9.3/
 ```
+
+> **Why this specific toolchain?** GCC 9.3.0 is the last GCC version before Clang became
+> mandatory for AOSP kernels. This kernel (4.19.325) has compiler flags tuned for GCC 9.x.
+> GCC 10+ enables new warnings (`-Warray-bounds`, `-Wstringop-overflow`) that trigger on
+> this older codebase. The LineageOS prebuilt is known-good — it's what produces the
+> official LineageOS 23.2 boot image for OnePlus 8.
 
 ### 2.3 Verify the Toolchain Works
 
