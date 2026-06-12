@@ -35,12 +35,6 @@ kernelsu-objs += supercall/dispatch.o
 kernelsu-objs += supercall/perm.o
 kernelsu-objs += supercall/supercall.o
 
-ifdef CONFIG_KPM
-kernelsu-objs += kpm/kpm.o
-kernelsu-objs += kpm/compact.o
-kernelsu-objs += kpm/super_access.o
-endif
-
 ifdef CONFIG_ARM64
 kernelsu-objs += compat/apatch_conflict.o
 endif
@@ -84,7 +78,7 @@ KSU_VERSION := $(shell expr 30000 + $(KSU_LOCAL_VERSION) + 700)
 KSU_TAG_NAME    := $(shell cd $(KSU_SRC); $(GIT_BIN) describe --abbrev=0 --tags 2>/dev/null || echo "v4.1.0")
 KSU_COMMIT_SHA  := $(shell cd $(KSU_SRC); $(GIT_BIN) rev-parse --short=8 HEAD 2>/dev/null || echo "unknown")
 ifneq ($(shell cd $(KSU_SRC); $(GIT_BIN) diff-index --quiet HEAD; echo $$?),0)
-KSU_COMMIT_SHA  := $(KSU_COMMIT_SHA)-dirty
+KSU_COMMIT_SHA  := $(KSU_COMMIT_SHA)-hotsteel
 endif
 KSU_BRANCH_NAME := $(shell cd $(KSU_SRC); $(GIT_BIN) branch --show-current 2>/dev/null || echo "unknown")
 
@@ -197,14 +191,6 @@ else
   ifeq ($(CONFIG_KSU),y)
     $(error Unsupported hook method)
   endif
-endif
-
-# Check if KPM is enabled
-ifdef CONFIG_KPM
-  $(info -- KPM is enabled)
-  $(info -- WARNING, This feature is unstable!!! You are WARNED!!!)
-else
-  $(info -- KPM is disabled)
 endif
 
 ifndef CONFIG_KSU_TRACEPOINT_HOOK
